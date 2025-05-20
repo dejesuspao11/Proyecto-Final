@@ -12,10 +12,13 @@ form.addEventListener('submit', async (e) => {
   const email = document.getElementById('email').value.trim();
   const password = document.getElementById('password').value.trim();
 
-  const { data, error } = await client.auth.signUp({
-    email,
-    password
-  });
+const { data, error } = await client.auth.signUp({
+  email,
+  password,
+  options: {
+    emailRedirectTo: 'http://127.0.0.1:5500/private/login.html'
+  }
+});
 
   if (error) {
     console.error('❌ Error al registrar:', error.message);

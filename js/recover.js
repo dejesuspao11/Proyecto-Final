@@ -10,7 +10,9 @@ form.addEventListener('submit', async (e) => {
   e.preventDefault();
   const email = document.getElementById('email').value.trim();
 
-  const { data, error } = await client.auth.resetPasswordForEmail(email);
+  const { data, error } = await client.auth.resetPasswordForEmail(email, {
+    redirectTo: 'http://127.0.0.1:5500/private/update-password.html'
+  });
 
   if (error) {
     console.error('❌ Error al enviar el correo:', error.message);
@@ -20,5 +22,6 @@ form.addEventListener('submit', async (e) => {
     console.log('✅ Enlace enviado:', data);
     mensaje.textContent = '📧 Se envió un enlace de recuperación a tu correo.';
     mensaje.style.color = 'green';
+    form.reset();
   }
 });
