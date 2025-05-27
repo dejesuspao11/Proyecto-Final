@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Panel de Administración</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+  <h1>📋 Panel de Administración de Inventario</h1>
+
+  <form id="form-activo">
+    <label>Nombre del activo:</label><br>
+    <input type="text" id="nombre" required><br><br>
+
+    <label>Tipo:</label><br>
+    <select id="tipo" required>
+      <option value="laptop">Laptop</option>
+      <option value="monitor">Monitor</option>
+      <option value="impresora">Impresora</option>
+    </select><br><br>
+
+    <label>Estado:</label><br>
+    <select id="estado" required>
+      <option value="disponible">Disponible</option>
+      <option value="asignado">Asignado</option>
+      <option value="en reparación">En reparación</option>
+    </select><br><br>
+
+    <label>Asignado a:</label><br>
+    <input type="text" id="asignado"><br><br>
+
+    <button type="submit">Crear activo</button>
+  </form>
+
+  <p id="mensaje"></p>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="../js/admin.js"></script>
+</body>
+</html>
