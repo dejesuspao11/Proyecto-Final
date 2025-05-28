@@ -4,91 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Panel de Administración de Inventario</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      line-height: 1.6;
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 20px;
-      color: #333;
-    }
-    h1 {
-      color: #2c3e50;
-      border-bottom: 2px solid #3498db;
-      padding-bottom: 10px;
-    }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 20px 0;
-    }
-    th, td {
-      border: 1px solid #ddd;
-      padding: 8px 12px;
-      text-align: left;
-    }
-    th {
-      background-color: #f2f2f2;
-    }
-    tr:nth-child(even) {
-      background-color: #f9f9f9;
-    }
-    button {
-      background-color: #3498db;
-      color: white;
-      border: none;
-      padding: 8px 12px;
-      border-radius: 4px;
-      cursor: pointer;
-      margin-right: 5px;
-    }
-    button:hover {
-      background-color: #2980b9;
-    }
-    #formulario-activo {
-      background-color: #f8f9fa;
-      padding: 20px;
-      border-radius: 5px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    }
-    input, select {
-      padding: 8px;
-      margin: 5px 0 15px;
-      border: 1px solid #ddd;
-      border-radius: 4px;
-      width: 100%;
-      max-width: 300px;
-    }
-    label {
-      display: block;
-      margin-top: 10px;
-      font-weight: bold;
-    }
-    #mensaje {
-      margin: 15px 0;
-      padding: 10px;
-      border-radius: 4px;
-    }
-    .filtros {
-      background-color: #e9ecef;
-      padding: 15px;
-      border-radius: 5px;
-      margin-bottom: 20px;
-    }
-    .filtros label {
-      display: inline;
-      margin-right: 5px;
-    }
-    .filtros select, .filtros input {
-      display: inline;
-      width: auto;
-      margin-right: 15px;
-    }
-    .acciones {
-      white-space: nowrap;
-    }
-  </style>
+  <!-- Link to the external CSS file -->
+  <link rel="stylesheet" href="../css/style.css">
+  <!-- Removed the style block -->
 </head>
 <body>
   <h1>🧰 Panel de Administración de Activos</h1>
@@ -96,27 +14,39 @@
 
   <!-- Filtros -->
   <div class="filtros">
-    <label for="filtro-tipo">Tipo:</label>
-    <select id="filtro-tipo">
-      <option value="">Todos</option>
-    </select>
+    <div class="filter-group"> <!-- Added wrapper -->
+      <label for="filtro-tipo">Tipo:</label>
+      <select id="filtro-tipo">
+        <option value="">Todos</option>
+        <!-- Options loaded by JS -->
+      </select>
+    </div>
 
-    <label for="filtro-estado">Estado:</label>
-    <select id="filtro-estado">
-      <option value="">Todos</option>
-      <option value="assigned">Asignado</option>
-      <option value="free">Libre</option>
-    </select>
+    <div class="filter-group"> <!-- Added wrapper -->
+      <label for="filtro-estado">Estado:</label>
+      <select id="filtro-estado">
+        <option value="">Todos</option>
+        <option value="assigned">Asignado</option>
+        <option value="free">Libre</option>
+      </select>
+    </div>
 
-    <label for="filtro-proveedor">Proveedor:</label>
-    <select id="filtro-proveedor">
-      <option value="">Todos</option>
-      <option value="1">Compañía</option>
-      <option value="2">KC Rentas</option>
-      <option value="3">New Era</option>
-    </select>
+    <div class="filter-group"> <!-- Added wrapper -->
+      <label for="filtro-proveedor">Proveedor:</label>
+      <select id="filtro-proveedor">
+        <option value="">Todos</option>
+        <option value="1">Compañía</option>
+        <option value="2">KC Rentas</option>
+        <option value="3">New Era</option>
+      </select>
+    </div>
 
-    <input type="text" id="filtro-busqueda" placeholder="Buscar por serie o marca..." />
+    <div class="filter-group"> <!-- Added wrapper for search input and message -->
+      <label for="filtro-busqueda">Buscar:</label>
+      <input type="text" id="filtro-busqueda" placeholder="Buscar por Marca o Serie..." />
+      <small class="search-hint">Solo se puede buscar por Marca y Serie.</small> <!-- Added message -->
+    </div>
+
     <button id="btn-limpiar-filtros">Limpiar filtros</button>
   </div>
 
@@ -148,17 +78,18 @@
       <label for="tipo">Tipo:</label>
       <select id="tipo" required>
         <option value="">-- Selecciona tipo de activo --</option>
+        <!-- Options loaded by JS -->
       </select>
 
       <label for="marca">Marca:</label>
       <input type="text" id="marca" placeholder="Ej: Dell, HP" required />
-      
+
       <label for="modelo">Modelo:</label>
       <input type="text" id="modelo" placeholder="Ej: Latitude 5420" required />
-      
+
       <label for="serie">Número de serie:</label>
-      <input type="text" id="serie" placeholder="Ej: ABC123456" 
-             pattern="[A-Za-z0-9\-]{3,}" 
+      <input type="text" id="serie" placeholder="Ej: ABC123456"
+             pattern="[A-Za-z0-9\-]{3,}"
              title="Solo letras, números y guiones, mínimo 3 caracteres" required />
 
       <label for="estado">Estado:</label>
@@ -170,6 +101,7 @@
       <label for="usuario">Asignar a:</label>
       <select id="usuario">
         <option value="">-- Selecciona un usuario --</option>
+        <!-- Options loaded by JS -->
       </select>
 
       <label for="proveedor">Proveedor:</label>
@@ -190,6 +122,7 @@
 
   <!-- Supabase JS -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <!-- Link to your JS file -->
   <script src="../js/inventory-admin.js"></script>
 </body>
 </html>
