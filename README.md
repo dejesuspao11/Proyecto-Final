@@ -1,3 +1,12 @@
+# 📄 Presentación
+---
+
+*   **Nombre del Estudiante:** Paola de Jesús Rebollar Cruz
+*   **Nombre de la Aplicación:** Inventario de Activos
+*   **Enlace a la Aplicación Desplegada (GitHub Pages):** [https://dejesuspao11.github.io/Proyecto-Final/](https://dejesuspao11.github.io/Proyecto-Final/)
+*   **Enlaces a la Conversación con la IA (para la realización del proyecto):**
+    *   [Parte 1](https://aistudio.google.com/app/prompts?state=%7B%22ids%22:%5B%221839atdIYVEE9GgFC0K4SxY5XlJh9-E8c%22%5D,%22action%22:%22open%22,%22userId%22:%22114195995956332701887%22,%22resourceKeys%22:%7B%7D%7D&usp=sharing)
+
 
 ## ⚙️ Configuración
 
