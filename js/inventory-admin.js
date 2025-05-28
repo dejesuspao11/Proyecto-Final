@@ -17,7 +17,7 @@ const proveedores = {
 
 // --- Cargar usuarios para el menú desplegable ---
 async function cargarUsuarios() {
-  const { data, error } = await client.from('users').select('id, full_name');
+  const { data, error } = await client.from('users').select('user_id, full_name');
 
   if (error) {
     console.error('Error al cargar usuarios:', error.message);
@@ -89,9 +89,12 @@ function mostrarFormulario() {
   mensaje.textContent = '';
 }
 function cancelarFormulario() {
-  form.reset();
-  formDiv.style.display = 'none';
-  mensaje.textContent = '';
+  form.reset();                            // Limpia todos los campos
+  formDiv.style.display = 'none';         // Oculta el formulario
+  mensaje.textContent = '';               // Limpia el mensaje
+  activoEditando = null;                  // Reinicia modo edición
+  document.getElementById('serie').disabled = false; // Reactiva el campo de serie
+  document.getElementById('form-titulo').textContent = 'Nuevo activo'; // Restaura el título
 }
 
 // --- Crear activo ---
@@ -166,3 +169,105 @@ function editarActivo(serialRaw) {
 // --- Inicialización ---
 cargarUsuarios();
 cargarActivos();
+
+let activoEditando = null;
+
+// --- Editar activo ---
+async function editarActivo(serialRaw) {
+  const serial = serialRaw.replace(/'/g, '');
+  const { data, error } = await client
+    .from('assets')
+    .select('*')
+    .eq('serial_number', serial)
+    .single();
+
+  if (error || !data) {
+    mensaje.textContent = '❌ Error al cargar datos para editar.';
+    mensaje.style.color = 'red';
+    console.error(error);
+    return;
+  }
+
+  // Rellenar el formulario con los datos existentes
+  document.getElementById('marca').value = data.make || '';
+  document.getElementById('modelo').value = data.model || '';
+  document.getElementById('serie').value = data.serial_number || '';
+  document.getElementById('estado').value = data.status || 'free';
+  document.getElementById('usuario').value = data.user_id || '';
+  document.getElementById('proveedor').value = data.vendor_id || 1;
+
+  activoEditando = data.serial_number;
+
+  // Ocultar campo de número de serie para evitar edición directa
+  document.getElementById('serie').disabled = true;
+  document.getElementById('form-titulo').textContent = 'Editar activo';
+  formDiv.style.display = 'block';
+  mensaje.textContent = '';
+}
+
+// --- Evento submit con soporte para crear o actualizar ---
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+
+  const activo = {
+    make: document.getElementById('marca').value.trim(),
+    model: document.getElementById('modelo').value.trim(),
+    status: document.getElementById('estado').value,
+    user_id: parseInt(document.getElementById('usuario').value) || null,
+    vendor_id: parseInt(document.getElementById('proveedor').value),
+  };
+
+  if (activoEditando) {
+    // UPDATE
+    const { error } = await client
+      .from('assets')
+      .update(activo)
+      .eq('serial_number', activoEditando);
+
+    if (error) {
+      mensaje.textContent = '❌ No se pudo actualizar el activo.';
+      mensaje.style.color = 'red';
+      console.error(error);
+    } else {
+      mensaje.textContent = '✅ Activo actualizado correctamente.';
+      mensaje.style.color = 'green';
+      cancelarFormulario();
+      cargarActivos();
+    }
+
+    activoEditando = null;
+    document.getElementById('serie').disabled = false;
+  } else {
+    // CREATE
+    const nuevo = {
+      ...activo,
+      serial_number: document.getElementById('serie').value.trim().replace(/'/g, '')
+    };
+
+    const { data: existente } = await client
+      .from('assets')
+      .select('serial_number')
+      .eq('serial_number', nuevo.serial_number)
+      .single();
+
+    if (existente) {
+      mensaje.textContent = '❌ Ya existe un activo con ese número de serie.';
+      mensaje.style.color = 'red';
+      return;
+    }
+
+    const { error } = await client.from('assets').insert(nuevo);
+
+    if (error) {
+      mensaje.textContent = '❌ No se pudo guardar el activo.';
+      mensaje.style.color = 'red';
+      console.error(error);
+    } else {
+      mensaje.textContent = '✅ Activo creado correctamente.';
+      mensaje.style.color = 'green';
+      cancelarFormulario();
+      cargarActivos();
+    }
+  }
+});
+
