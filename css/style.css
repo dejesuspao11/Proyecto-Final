@@ -25,11 +25,12 @@ body {
 
 h1 {
   color: #2c3e50;
-  /* Default H1 style (used on Public, Recover, Update Password pages) */
+  /* Default H1 style (used on Public, Recover, Update Password, and Main pages) */
   margin-top: 0;
   margin-bottom: 20px;
   padding-bottom: 10px;
   border-bottom: 2px solid #3498db;
+  text-align: center; /* Center h1 by default */
 }
 
 /* H1 style specifically when inside the header-container (for Admin page) */
@@ -37,11 +38,14 @@ h1 {
     margin: 0; /* Remove default margin */
     padding-bottom: 0; /* Remove padding if border is on container */
     border-bottom: none; /* Remove border from h1 */
+    text-align: left; /* Align left within flex container */
 }
 
 p {
     margin-bottom: 20px;
+    text-align: center; /* Center paragraphs by default */
 }
+
 
 /* --- Shared Form/Container Styles --- */
 /* Container for forms (Login, Recover, Update Password, and Add/Edit Form) */
@@ -55,6 +59,7 @@ p {
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
   margin: 20px auto; /* Center the block container */
   max-width: 500px; /* Max width for smaller forms */
+  /* Removed text-align: center here, forms usually align left */
 }
 
 /* Style for form inputs and selects */
@@ -88,6 +93,7 @@ p {
   margin-bottom: 5px;
   font-weight: bold;
   color: #555;
+  text-align: left; /* Align form labels left */
 }
 
 /* Style for buttons within forms */
@@ -104,6 +110,7 @@ p {
 
 /* Specific style for the Update Password submit button if needed */
 /* #update-password-container button[type="submit"] { ... } */
+
 
 /* --- Message box styles --- */
 #mensaje {
@@ -176,9 +183,9 @@ tr:hover {
 .public-filters .filter-group {
      display: flex;
      flex-direction: column;
-     flex-basis: auto;
-     flex-grow: 1;
-     min-width: 120px;
+     flex-basis: auto; /* Allow based on content */
+     flex-grow: 1; /* Allow to grow */
+     min-width: 120px; /* Slightly smaller min-width than admin filters */
 }
 
 .public-filters label {
@@ -188,7 +195,6 @@ tr:hover {
      color: #555;
 }
 
-/* Corrected Line: Removed the extra closing square bracket */
 .public-filters input[type="text"],
 .public-filters select {
      display: inline-block;
@@ -271,7 +277,8 @@ td.status.free {
   min-width: 150px;
 }
 
-/* Button styles (General) - Note: Specific buttons override these */
+/* --- Button Styles (General) --- */
+/* Specific buttons override these */
 button {
   background-color: #3498db;
   color: white;
@@ -297,21 +304,25 @@ button:hover {
 
 #btn-cancelar {
     background-color: #6c757d;
+    margin-right: 10px; /* Add margin back for buttons in form */
 }
 
 #btn-cancelar:hover {
     background-color: #5a6268;
 }
 
+/* Clear filters button (Admin page) */
 #btn-limpiar-filtros {
     background-color: #ffc107;
     color: #333;
+    margin-right: 0; /* No right margin for the last button in filter bar */
 }
 
 #btn-limpiar-filtros:hover {
     background-color: #e0a800;
 }
 
+/* Logout button (Admin page) */
 #btn-logout {
     margin-right: 0; /* Ensure no right margin */
     background-color: #dc3545; /* Red color for logout */
@@ -319,6 +330,46 @@ button:hover {
 
 #btn-logout:hover {
     background-color: #c82333;
+}
+
+/* --- Styles for the Main Menu Page --- */
+#main-menu-container { /* ADDED */
+  background-color: #fff;
+  padding: 40px 25px; /* Increased vertical padding */
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  margin: 50px auto; /* Center and add vertical margin */
+  max-width: 600px; /* Max width for the container */
+  text-align: center; /* Center text content */
+}
+
+/* Button group layout */
+.button-group { /* ADDED */
+  display: flex; /* Arrange links using flexbox */
+  gap: 20px; /* Space between buttons */
+  justify-content: center; /* Center the button group */
+  flex-wrap: wrap; /* Allow buttons to wrap on smaller screens */
+}
+
+/* Style for links that look like buttons */
+.button-link { /* ADDED */
+  display: inline-block; /* Needed for padding/margins */
+  background-color: #3498db;
+  color: white;
+  border: none;
+  padding: 12px 20px; /* Button-like padding */
+  border-radius: 4px;
+  cursor: pointer;
+  text-decoration: none; /* Remove underline */
+  font-size: 1.1em; /* Match new asset button size */
+  transition: background-color 0.2s ease;
+  text-align: center; /* Center text inside the button-link */
+  min-width: 180px; /* Give buttons a minimum width */
+}
+
+.button-link:hover { /* ADDED */
+  background-color: #2980b9;
+  color: white; /* Ensure color stays white on hover */
 }
 
 
@@ -331,6 +382,7 @@ button:hover {
     }
      .header-container h1 {
          margin-bottom: 10px;
+         text-align: left; /* Ensure title is left-aligned when stacked */
      }
 
     /* Admin filters responsive */
@@ -347,6 +399,7 @@ button:hover {
      }
      .filtros button {
          align-self: stretch;
+         margin-top: 10px; /* Add space above button when stacked */
      }
 
      /* Public filters responsive */
@@ -357,7 +410,40 @@ button:hover {
       .public-filters .filter-group {
          width: 100%;
       }
-.public-filters input[type="text"],
-.public-filters select {
-    width: 100%;
+      .public-filters input[type="text"],
+      .public-filters select {
+          width: 100%;
+      }
+
+     /* Main menu buttons responsive */
+     .button-group { /* ADDED */
+        flex-direction: column; /* Stack buttons vertically */
+        gap: 15px;
+        align-items: stretch; /* Stretch buttons to full width */
+     }
+      .button-link { /* ADDED */
+         min-width: auto; /* Remove min-width when stacked */
+      }
+
+      /* Adjust padding on smaller screens */
+      body {
+        padding: 10px;
+      }
+
+      #main-menu-container,
+      #recover-container,
+      #formulario-activo,
+      #update-password-container,
+      #login-container,
+      #public-inventory-container {
+        padding: 15px; /* Reduce padding on smaller containers */
+      }
+
+       #mensaje {
+         padding: 10px; /* Reduce message padding */
+       }
+
+       h1 {
+          font-size: 1.8em; /* Slightly smaller h1 */
+       }
 }
