@@ -4,16 +4,26 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Inventario Público</title>
-  <style>
-    body { font-family: Arial, sans-serif; padding: 20px; }
-    table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-    th, td { border: 1px solid #ccc; padding: 10px; text-align: left; }
-    th { background-color: #f0f0f0; }
-  </style>
+  <!-- Link to the external CSS file -->
+  <link rel="stylesheet" href="../css/style.css">
+  <!-- Removed the inline style block -->
 </head>
 <body>
   <h1>📋 Inventario de Activos de TI (Vista Pública)</h1>
   <p>Consulta los activos disponibles y en uso dentro de la organización.</p>
+
+  <!-- Search/Filter Section (Optional - if you want search on public page) -->
+  <!-- If you want search, you'll need to add an input here -->
+  <!-- For example:
+  <div class="filtros" style="justify-content: flex-start;">
+      <div class="filter-group">
+          <label for="search-public">Buscar:</label>
+          <input type="text" id="search-public" placeholder="Buscar...">
+      </div>
+      // You could add simple public filters here too if needed
+  </div>
+  -->
+
 
   <table>
     <thead>
@@ -24,14 +34,17 @@
         <th>Serie</th>
         <th>Estado</th>
         <th>Asignado a</th>
+        <!-- Removed 'Proveedor' column as per your public view structure -->
       </tr>
     </thead>
     <tbody id="tabla-inventario">
-      <!-- Se llenará dinámicamente -->
+      <!-- Se llenará dinámicamente by public-inventory.js -->
     </tbody>
   </table>
 
+  <!-- Supabase JS -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <!-- Link to your public JS file -->
   <script src="../js/public-inventory.js"></script>
 </body>
 </html>
