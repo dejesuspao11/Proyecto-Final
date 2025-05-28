@@ -5,42 +5,66 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Inventario Público</title>
   <!-- Link to the external CSS file -->
+  <!-- Adjust the path '../css/style.css' if your CSS file is in a different location -->
   <link rel="stylesheet" href="../css/style.css">
-  <!-- Removed the inline style block -->
 </head>
 <body>
+
   <h1>📋 Inventario de Activos de TI (Vista Pública)</h1>
   <p>Consulta los activos disponibles y en uso dentro de la organización.</p>
 
-  <!-- Search/Filter Section (Optional - if you want search on public page) -->
-  <!-- If you want search, you'll need to add an input here -->
-  <!-- For example:
-  <div class="filtros" style="justify-content: flex-start;">
+  <!-- Search/Filter Section -->
+  <!-- Added a container for public filters -->
+  <div class="public-filters">
       <div class="filter-group">
           <label for="search-public">Buscar:</label>
           <input type="text" id="search-public" placeholder="Buscar...">
+          <!-- You might add a search hint message here too if helpful -->
+          <!-- <small class="search-hint">Busca por cualquier campo visible.</small> -->
       </div>
-      // You could add simple public filters here too if needed
+      <!-- You could add simple public filters here too if needed, e.g., by type or status -->
+       <div class="filter-group">
+          <label for="filter-public-type">Tipo:</label>
+          <select id="filter-public-type">
+            <option value="">Todos los tipos</option>
+            <!-- Options would be loaded by public-inventory.js -->
+          </select>
+       </div>
+        <div class="filter-group">
+          <label for="filter-public-status">Estado:</label>
+          <select id="filter-public-status">
+            <option value="">Todos los estados</option>
+             <option value="assigned">Asignado</option>
+             <option value="free">Libre</option>
+          </select>
+       </div>
   </div>
-  -->
+  <!-- End Search/Filter Section -->
 
+  <!-- Container for the main table -->
+  <div id="public-inventory-container">
+      <table>
+        <thead>
+          <tr>
+            <th>Tipo</th>
+            <th>Marca</th>
+            <th>Modelo</th>
+            <th>Serie</th>
+            <th>Estado</th>
+            <th>Asignado a</th>
+            <!-- Removed 'Proveedor' column as per your public view structure -->
+          </tr>
+        </thead>
+        <tbody id="tabla-inventario">
+          <!-- Se llenará dinámicamente by public-inventory.js -->
+          <!-- Example loading row -->
+           <tr><td colspan="6">Cargando inventario...</td></tr>
+        </tbody>
+      </table>
+  </div>
+   <!-- The message element might be useful here for loading/error messages -->
+   <p id="mensaje"></p>
 
-  <table>
-    <thead>
-      <tr>
-        <th>Tipo</th>
-        <th>Marca</th>
-        <th>Modelo</th>
-        <th>Serie</th>
-        <th>Estado</th>
-        <th>Asignado a</th>
-        <!-- Removed 'Proveedor' column as per your public view structure -->
-      </tr>
-    </thead>
-    <tbody id="tabla-inventario">
-      <!-- Se llenará dinámicamente by public-inventory.js -->
-    </tbody>
-  </table>
 
   <!-- Supabase JS -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>

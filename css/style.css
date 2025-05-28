@@ -1,5 +1,6 @@
 /* style.css */
 
+/* --- General Styles --- */
 body {
   font-family: Arial, sans-serif;
   line-height: 1.6;
@@ -10,7 +11,7 @@ body {
   background-color: #f4f7f6;
 }
 
-/* Styles for header container (from admin page) */
+/* Styles for header container (Used on Admin page) */
 .header-container {
     display: flex;
     justify-content: space-between;
@@ -24,28 +25,30 @@ body {
 
 h1 {
   color: #2c3e50;
-  /* Adjust if within header-container */
+  /* Default H1 style (used on Public, Recover, Update Password pages) */
   margin-top: 0;
-  margin-bottom: 20px; /* Keep if not in header-container */
-  padding-bottom: 10px; /* Keep if not in header-container */
-  border-bottom: 2px solid #3498db; /* Keep if not in header-container */
-
-  /* Adjust if in header-container */
-  /* margin: 0; */
-  /* padding-bottom: 0; */
-  /* border-bottom: none; */
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #3498db;
 }
 
+/* H1 style specifically when inside the header-container (for Admin page) */
+.header-container h1 {
+    margin: 0; /* Remove default margin */
+    padding-bottom: 0; /* Remove padding if border is on container */
+    border-bottom: none; /* Remove border from h1 */
+}
 
 p {
     margin-bottom: 20px;
 }
 
-/* --- Shared Form/Container Styles (Apply these to login/recover as well) --- */
-
-/* Container for forms (e.g., login, recover, or the add/edit form itself) */
-#recover-container, /* Add this ID */
-#formulario-activo { /* Existing ID */
+/* --- Shared Form/Container Styles --- */
+/* Container for forms (Login, Recover, Update Password, and Add/Edit Form) */
+#recover-container,
+#formulario-activo, /* This is the add/edit form in Admin */
+#update-password-container,
+#login-container { /* Assuming your login form is wrapped like this */
   background-color: #fff;
   padding: 25px;
   border-radius: 8px;
@@ -55,17 +58,17 @@ p {
 }
 
 /* Style for form inputs and selects */
-/* Using attribute selectors for more specific targeting */
-#recover-container input[type="email"], /* Add this selector */
-#recover-container input[type="text"],
-#recover-container input[type="password"],
+/* Applies to inputs/selects within the shared form containers */
+#recover-container input,
 #recover-container select,
-#formulario-activo input[type="text"],
-#formulario-activo input[type="number"],
-#formulario-activo select {
+#formulario-activo input,
+#formulario-activo select,
+#update-password-container input,
+#update-password-container select,
+#login-container input,
+#login-container select {
   display: block; /* Make inputs/selects block elements */
   width: 100%; /* Full width within their container */
-  /* Removed max-width here to let the container control max-width */
   padding: 10px;
   margin: 8px 0 20px; /* Added margin-bottom */
   border: 1px solid #ced4da;
@@ -74,9 +77,13 @@ p {
   font-size: 1em;
 }
 
+
 /* Style for form labels */
-#recover-container label, /* Add this selector */
-#formulario-activo label { /* Existing selector */
+/* Applies to labels within the shared form containers */
+#recover-container label,
+#formulario-activo label,
+#update-password-container label,
+#login-container label {
   display: block;
   margin-bottom: 5px;
   font-weight: bold;
@@ -84,19 +91,19 @@ p {
 }
 
 /* Style for buttons within forms */
-#recover-container button[type="submit"], /* Add this selector */
+/* Applies to buttons within the shared form containers */
+#recover-container button[type="submit"],
 #formulario-activo button[type="submit"],
-#formulario-activo button[type="button"] {
+#formulario-activo button[type="button"],
+#update-password-container button[type="submit"],
+#login-container button[type="submit"] {
     /* Inherits general button styles */
-    /* You might want specific form button styles here if they differ */
     margin-right: 10px; /* Add some space between buttons */
     margin-top: 10px; /* Add space above buttons */
 }
 
-#recover-container button[type="submit"] {
-    /* If you want specific style for the recover button */
-}
-
+/* Specific style for the Update Password submit button if needed */
+/* #update-password-container button[type="submit"] { ... } */
 
 /* --- Message box styles --- */
 #mensaje {
@@ -106,27 +113,30 @@ p {
   text-align: center;
   font-weight: bold;
   max-width: 500px; /* Give the message a max-width like the form */
+  /* Text/background/border colors for message are handled by JS displayMessage function */
+  box-sizing: border-box; /* Include padding and border in width */
 }
 
-/* (Rest of your style.css from the admin page - Table, Filter styles, etc.) */
 
-/* Table styles */
+/* --- Table Styles (General - applies to both admin and public tables) --- */
 table {
   width: 100%;
   border-collapse: collapse;
-  margin: 20px 0;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  margin: 0; /* Reset margin, container will handle outer margin */
+  /* Box shadow is handled by the container div */
 }
 
 th, td {
   border: 1px solid #ddd;
   padding: 10px 12px;
   text-align: left;
+  vertical-align: top; /* Align cell content to the top */
 }
 
 th {
   background-color: #e9ecef;
   font-weight: bold;
+  color: #555; /* Match label color */
 }
 
 tr:nth-child(even) {
@@ -137,7 +147,131 @@ tr:hover {
     background-color: #eef2f7;
 }
 
-/* Button styles (General) */
+/* --- Public Inventory Specific Styles --- */
+
+/* Container for the public table */
+#public-inventory-container {
+   background-color: #fff;
+   padding: 20px; /* Slightly less padding than forms */
+   border-radius: 8px;
+   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+   margin: 20px auto; /* Center the block */
+   max-width: 100%; /* Allow it to take full width up to body max-width */
+   overflow-x: auto; /* Add horizontal scroll if table is too wide */
+}
+
+/* Public Filters / Search Bar Styles */
+.public-filters {
+    background-color: #e9ecef; /* Same as admin filters background */
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px; /* Space between filter items */
+    align-items: center;
+    justify-content: flex-start; /* Align items to the start */
+}
+
+.public-filters .filter-group {
+     display: flex;
+     flex-direction: column;
+     flex-basis: auto;
+     flex-grow: 1;
+     min-width: 120px;
+}
+
+.public-filters label {
+     display: block;
+     margin-bottom: 5px;
+     font-weight: bold;
+     color: #555;
+}
+
+/* Corrected Line: Removed the extra closing square bracket */
+.public-filters input[type="text"],
+.public-filters select {
+     display: inline-block;
+     width: auto;
+     max-width: none;
+     margin: 0;
+     padding: 8px;
+     border: 1px solid #ced4da;
+     border-radius: 4px;
+     font-size: 1em;
+}
+
+/* Optional: Status specific styling (requires JS to add classes) */
+td.status.assigned {
+    font-weight: bold;
+    color: #28a745; /* Green for Assigned */
+}
+
+td.status.free {
+    font-weight: bold;
+    color: #ffc107; /* Orange/Warning for Free */
+}
+
+/* --- Admin Specific Styles --- */
+
+/* Admin Filters section styles */
+.filtros { /* Admin filters */
+  background-color: #e9ecef;
+  padding: 15px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  align-items: center;
+  /* justify-content: flex-start; /* Added flex-start for consistency */ */
+}
+
+.filter-group { /* Admin filter-group */
+    display: flex;
+    flex-direction: column;
+    flex-basis: auto;
+    flex-grow: 1;
+    min-width: 150px; /* Admin filters might be slightly wider */
+}
+
+.filtros label { /* Admin label */
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #555;
+}
+
+.filtros select,
+.filtros input[type="text"] { /* Admin inputs/selects */
+  display: inline-block;
+  width: auto;
+  flex-grow: 0;
+  max-width: none;
+  margin: 0;
+  padding: 8px;
+}
+
+.search-hint { /* Admin search hint */
+    display: block;
+    font-size: 0.85em;
+    color: #777;
+    margin-top: 5px;
+}
+
+.filtros button { /* Admin buttons within filters */
+    margin-top: auto;
+    align-self: flex-end;
+    margin-right: 0;
+}
+
+/* Acciones column style (from admin page) */
+.acciones {
+  white-space: nowrap;
+  min-width: 150px;
+}
+
+/* Button styles (General) - Note: Specific buttons override these */
 button {
   background-color: #3498db;
   color: white;
@@ -145,7 +279,7 @@ button {
   padding: 10px 15px;
   border-radius: 4px;
   cursor: pointer;
-  /* margin-right: 8px; */ /* Removed general margin-right */
+  /* margin-right: 8px; */ /* Removed general right margin, manage explicitly */
   transition: background-color 0.2s ease;
 }
 
@@ -155,9 +289,10 @@ button:hover {
 
 /* Specific button styles (from admin page) */
 #btn-nuevo-activo {
-    margin-bottom: 20px;
+    margin-bottom: 20px; /* Margin below the button */
     padding: 12px 18px;
     font-size: 1.1em;
+    margin-right: 0; /* Ensure no right margin if it's a standalone button */
 }
 
 #btn-cancelar {
@@ -178,7 +313,7 @@ button:hover {
 }
 
 #btn-logout {
-    margin-right: 0;
+    margin-right: 0; /* Ensure no right margin */
     background-color: #dc3545; /* Red color for logout */
 }
 
@@ -187,64 +322,9 @@ button:hover {
 }
 
 
-/* Filter section styles (from admin page) */
-.filtros {
-  background-color: #e9ecef;
-  padding: 15px;
-  border-radius: 5px;
-  margin-bottom: 20px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 15px;
-  align-items: center;
-}
-
-.filter-group {
-    display: flex;
-    flex-direction: column;
-    flex-basis: auto;
-    flex-grow: 1;
-    min-width: 150px;
-}
-
-.filtros label {
-  display: block;
-  margin-bottom: 5px;
-  font-weight: bold;
-  color: #555;
-}
-
-.filtros select,
-.filtros input[type="text"] {
-  display: inline-block;
-  width: auto;
-  flex-grow: 0;
-  max-width: none;
-  margin: 0;
-  padding: 8px;
-}
-
-.search-hint {
-    display: block;
-    font-size: 0.85em;
-    color: #777;
-    margin-top: 5px;
-}
-
-.filtros button {
-    margin-top: auto;
-    align-self: flex-end;
-    margin-right: 0;
-}
-
-
-.acciones {
-  white-space: nowrap;
-  min-width: 150px;
-}
-
 /* Responsive considerations */
 @media (max-width: 768px) {
+    /* Admin header responsive */
     .header-container {
         flex-direction: column;
         align-items: flex-start;
@@ -253,6 +333,7 @@ button:hover {
          margin-bottom: 10px;
      }
 
+    /* Admin filters responsive */
     .filtros {
         flex-direction: column;
         align-items: stretch;
@@ -267,4 +348,16 @@ button:hover {
      .filtros button {
          align-self: stretch;
      }
+
+     /* Public filters responsive */
+     .public-filters {
+        flex-direction: column;
+        align-items: stretch;
+     }
+      .public-filters .filter-group {
+         width: 100%;
+      }
+.public-filters input[type="text"],
+.public-filters select {
+    width: 100%;
 }
