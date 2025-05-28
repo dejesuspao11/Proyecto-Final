@@ -71,7 +71,7 @@ La seguridad de tu aplicación en Supabase se centra en la **Seguridad a Nivel d
 
 ## ✅ Estado del Proyecto
 
-Actualmente, la aplicación es funcional en cuanto a la navegación (desde `index.html`), visualización pública del inventario con filtros y búsqueda (en campos directos), y el flujo completo de autenticación de administrador (registro, login, recuperación de contraseña) y gestión CRUD de activos en el panel de administración.
+Actualmente, la aplicación es funcional en cuanto a la navegación (desde `index.html`), visualización pública del inventario, y el flujo completo de autenticación de administrador (registro, login, recuperación de contraseña) y gestión CRUD de activos en el panel de administración.
 
 La parte de seguridad, específicamente la configuración completa y probada de **RLS, la restricción de dominio a nivel de base de datos**, y la protección adecuada de todas las tablas, está en proceso de despliegue y verificación para garantizar que los datos estén protegidos adecuadamente en producción. El proyecto es funcional pero se recomienda **no utilizarlo con datos sensibles** hasta que se completen las medidas de seguridad a nivel de backend.
 
