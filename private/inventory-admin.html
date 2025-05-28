@@ -35,11 +35,19 @@
   <div id="formulario-activo" style="display:none; margin-top: 20px;">
     <h3 id="form-titulo">Formulario de activo</h3>
     <form id="form-nuevo-activo">
+      <label for="tipo">Tipo:</label>
+      <select id="tipo" required>
+        <option value="">-- Selecciona tipo de activo --</option>
+        <option value="1">Laptop</option>
+        <option value="2">Monitor</option>
+      </select>
+
       <input type="text" id="marca" placeholder="Marca" required />
       <input type="text" id="modelo" placeholder="Modelo" required />
       <input type="text" id="serie" placeholder="Número de serie (sin comillas, ni espacios)" 
-             pattern="[A-Za-z0-9\-]{3,}" title="Solo letras, números y guiones, mínimo 3 caracteres" required />
-      <select id="estado" required>
+             pattern="[A-Za-z0-9\\-]{3,}" title="Solo letras, números y guiones, mínimo 3 caracteres" required />
+      
+      <select id="estado">
         <option value="assigned">Asignado</option>
         <option value="free">Libre</option>
       </select>
@@ -50,7 +58,7 @@
       </select>
 
       <label for="proveedor">Proveedor:</label>
-      <select id="proveedor" required>
+      <select id="proveedor">
         <option value="1">Compañía</option>
         <option value="2">KC Rentas</option>
         <option value="3">New Era</option>
@@ -64,6 +72,7 @@
 
   <p id="mensaje"></p>
 
+  <!-- Supabase JS -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="../js/inventory-admin.js"></script>
 </body>
