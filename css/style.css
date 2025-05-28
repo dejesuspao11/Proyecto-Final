@@ -7,29 +7,33 @@ body {
   margin: 0 auto;
   padding: 20px;
   color: #333;
-  background-color: #f4f7f6; /* Added a light background */
+  background-color: #f4f7f6;
 }
 
-/* Header container for title and logout button */
+/* Styles for header container (from admin page) */
 .header-container {
-    display: flex; /* Use flexbox to align items */
-    justify-content: space-between; /* Push title and button to opposite ends */
-    align-items: center; /* Vertically center items */
-    margin-bottom: 20px; /* Add space below the header area */
-    flex-wrap: wrap; /* Allow items to wrap on smaller screens */
-    gap: 15px; /* Space between items when they wrap */
-    border-bottom: 2px solid #3498db; /* Moved border to the container */
-    padding-bottom: 10px; /* Moved padding bottom to the container */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 15px;
+    border-bottom: 2px solid #3498db;
+    padding-bottom: 10px;
 }
 
 h1 {
   color: #2c3e50;
-  /* Styles below were moved or adjusted in .header-container */
-  margin: 0; /* Reset margin as it's in a flex container */
-  padding-bottom: 0; /* Reset padding as border is on container */
-  border-bottom: none; /* Remove border from h1 */
-  /* kept margin-bottom 20px from original h1 rule, but it might be overridden by header-container margin */
-  /* Adjust based on desired spacing, maybe remove or adjust the margin-bottom below if gap is enough */
+  /* Adjust if within header-container */
+  margin-top: 0;
+  margin-bottom: 20px; /* Keep if not in header-container */
+  padding-bottom: 10px; /* Keep if not in header-container */
+  border-bottom: 2px solid #3498db; /* Keep if not in header-container */
+
+  /* Adjust if in header-container */
+  /* margin: 0; */
+  /* padding-bottom: 0; */
+  /* border-bottom: none; */
 }
 
 
@@ -37,58 +41,127 @@ p {
     margin-bottom: 20px;
 }
 
+/* --- Shared Form/Container Styles (Apply these to login/recover as well) --- */
+
+/* Container for forms (e.g., login, recover, or the add/edit form itself) */
+#recover-container, /* Add this ID */
+#formulario-activo { /* Existing ID */
+  background-color: #fff;
+  padding: 25px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  margin: 20px auto; /* Center the block container */
+  max-width: 500px; /* Max width for smaller forms */
+}
+
+/* Style for form inputs and selects */
+/* Using attribute selectors for more specific targeting */
+#recover-container input[type="email"], /* Add this selector */
+#recover-container input[type="text"],
+#recover-container input[type="password"],
+#recover-container select,
+#formulario-activo input[type="text"],
+#formulario-activo input[type="number"],
+#formulario-activo select {
+  display: block; /* Make inputs/selects block elements */
+  width: 100%; /* Full width within their container */
+  /* Removed max-width here to let the container control max-width */
+  padding: 10px;
+  margin: 8px 0 20px; /* Added margin-bottom */
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-size: 1em;
+}
+
+/* Style for form labels */
+#recover-container label, /* Add this selector */
+#formulario-activo label { /* Existing selector */
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #555;
+}
+
+/* Style for buttons within forms */
+#recover-container button[type="submit"], /* Add this selector */
+#formulario-activo button[type="submit"],
+#formulario-activo button[type="button"] {
+    /* Inherits general button styles */
+    /* You might want specific form button styles here if they differ */
+    margin-right: 10px; /* Add some space between buttons */
+    margin-top: 10px; /* Add space above buttons */
+}
+
+#recover-container button[type="submit"] {
+    /* If you want specific style for the recover button */
+}
+
+
+/* --- Message box styles --- */
+#mensaje {
+  margin: 20px auto; /* Center the message block */
+  padding: 12px;
+  border-radius: 4px;
+  text-align: center;
+  font-weight: bold;
+  max-width: 500px; /* Give the message a max-width like the form */
+}
+
+/* (Rest of your style.css from the admin page - Table, Filter styles, etc.) */
+
 /* Table styles */
 table {
   width: 100%;
   border-collapse: collapse;
   margin: 20px 0;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Added subtle shadow */
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
 th, td {
   border: 1px solid #ddd;
-  padding: 10px 12px; /* Slightly increased padding */
+  padding: 10px 12px;
   text-align: left;
 }
 
 th {
-  background-color: #e9ecef; /* Lighter header background */
+  background-color: #e9ecef;
   font-weight: bold;
 }
 
 tr:nth-child(even) {
-  background-color: #f8f9fa; /* Lighter even row background */
+  background-color: #f8f9fa;
 }
 
 tr:hover {
-    background-color: #eef2f7; /* Highlight row on hover */
+    background-color: #eef2f7;
 }
 
-/* Button styles */
+/* Button styles (General) */
 button {
   background-color: #3498db;
   color: white;
   border: none;
-  padding: 10px 15px; /* Slightly increased padding */
+  padding: 10px 15px;
   border-radius: 4px;
   cursor: pointer;
-  margin-right: 8px; /* Increased margin */
-  transition: background-color 0.2s ease; /* Smooth hover transition */
+  /* margin-right: 8px; */ /* Removed general margin-right */
+  transition: background-color 0.2s ease;
 }
 
 button:hover {
   background-color: #2980b9;
 }
 
-/* Specific button styles */
+/* Specific button styles (from admin page) */
 #btn-nuevo-activo {
     margin-bottom: 20px;
-    padding: 12px 18px; /* Larger button */
+    padding: 12px 18px;
     font-size: 1.1em;
 }
 
 #btn-cancelar {
-    background-color: #6c757d; /* Grey cancel button */
+    background-color: #6c757d;
 }
 
 #btn-cancelar:hover {
@@ -96,7 +169,7 @@ button:hover {
 }
 
 #btn-limpiar-filtros {
-    background-color: #ffc107; /* Warning/Orange clear button */
+    background-color: #ffc107;
     color: #333;
 }
 
@@ -105,9 +178,7 @@ button:hover {
 }
 
 #btn-logout {
-    /* Specific styles for logout button if needed,
-       otherwise it inherits from the general button rule */
-    margin-right: 0; /* Important if it's the last item in the flex container */
+    margin-right: 0;
     background-color: #dc3545; /* Red color for logout */
 }
 
@@ -116,131 +187,84 @@ button:hover {
 }
 
 
-/* Form styles */
-#formulario-activo {
-  background-color: #fff; /* White form background */
-  padding: 25px; /* Increased padding */
-  border-radius: 8px; /* More rounded corners */
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* More prominent shadow */
-  margin-bottom: 20px;
-}
-
-#form-titulo {
-    margin-top: 0;
-    margin-bottom: 20px;
-    color: #2c3e50;
-}
-
-input[type="text"], input[type="number"], select { /* Added other potential input types if needed */
-  display: block; /* Make inputs/selects block elements */
-  width: 100%; /* Full width within their container */
-  max-width: 400px; /* Increased max-width for forms */
-  padding: 10px; /* Increased padding */
-  margin: 8px 0 20px; /* Added margin-bottom */
-  border: 1px solid #ced4da; /* Standard border color */
-  border-radius: 4px;
-  box-sizing: border-box; /* Include padding and border in element's total width and height */
-  font-size: 1em;
-}
-
-label {
-  display: block;
-  margin-bottom: 5px; /* Added margin below label */
-  font-weight: bold;
-  color: #555;
-}
-
-/* Message box styles */
-#mensaje {
-  margin: 20px 0; /* Increased margin */
-  padding: 12px; /* Increased padding */
-  border-radius: 4px;
-  text-align: center; /* Center the message */
-  font-weight: bold;
-}
-
-/* Filter section styles */
+/* Filter section styles (from admin page) */
 .filtros {
   background-color: #e9ecef;
   padding: 15px;
   border-radius: 5px;
   margin-bottom: 20px;
-  display: flex; /* Use flexbox for better filter layout */
-  flex-wrap: wrap; /* Allow items to wrap on smaller screens */
-  gap: 15px; /* Space between filter items */
-  align-items: center; /* Align items vertically */
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  align-items: center;
 }
 
-.filter-group { /* Add a wrapper for each filter item */
+.filter-group {
     display: flex;
-    flex-direction: column; /* Label above input/select */
-    /* Allow filter groups to grow if needed, but not shrink below content */
+    flex-direction: column;
     flex-basis: auto;
-    flex-grow: 1; /* Allow them to grow */
-    min-width: 150px; /* Minimum width before wrapping */
+    flex-grow: 1;
+    min-width: 150px;
 }
 
 .filtros label {
-  display: block; /* Labels above inputs/selects */
-  margin-bottom: 5px; /* Space between label and input */
+  display: block;
+  margin-bottom: 5px;
   font-weight: bold;
   color: #555;
 }
 
 .filtros select,
-.filtros input[type="text"] { /* Target specifically text input for search */
-  display: inline-block; /* Keep them inline-block within flex item */
-  width: auto; /* Allow input/select to size based on content/flex */
-  flex-grow: 0; /* Prevent them from stretching */
-  max-width: none; /* Remove max-width inherited from general input rule */
-  margin: 0; /* Remove default margin */
+.filtros input[type="text"] {
+  display: inline-block;
+  width: auto;
+  flex-grow: 0;
+  max-width: none;
+  margin: 0;
   padding: 8px;
 }
 
-/* Style for the search hint message */
 .search-hint {
-    display: block; /* Show on a new line below the search input */
-    font-size: 0.85em; /* Slightly larger than 0.8em */
-    color: #777; /* A bit darker grey */
-    margin-top: 5px; /* Space above the hint */
+    display: block;
+    font-size: 0.85em;
+    color: #777;
+    margin-top: 5px;
 }
 
-/* Style for the "Limpiar filtros" button within filters */
 .filtros button {
-    margin-top: auto; /* Push the button to the bottom if items have different heights */
-    align-self: flex-end; /* Align itself to the end of the flex container */
-    /* Revert some button specific styles if needed */
-    margin-right: 0; /* Ensure no right margin */
+    margin-top: auto;
+    align-self: flex-end;
+    margin-right: 0;
 }
 
 
 .acciones {
-  white-space: nowrap; /* Prevent action buttons from wrapping */
-  min-width: 150px; /* Ensure enough space for buttons */
+  white-space: nowrap;
+  min-width: 150px;
 }
 
 /* Responsive considerations */
 @media (max-width: 768px) {
     .header-container {
-        flex-direction: column; /* Stack header items vertically */
-        align-items: flex-start; /* Align items to the start */
+        flex-direction: column;
+        align-items: flex-start;
     }
      .header-container h1 {
-         margin-bottom: 10px; /* Add space below title when stacked */
+         margin-bottom: 10px;
      }
 
     .filtros {
-        flex-direction: column; /* Stack filters vertically on smaller screens */
-        align-items: stretch; /* Stretch items to fill container */
+        flex-direction: column;
+        align-items: stretch;
     }
     .filter-group {
-        width: 100%; /* Make filter groups take full width */
+        width: 100%;
     }
      .filtros select,
      .filtros input[type="text"] {
-         width: 100%; /* Make inputs/selects full width */
+         width: 100%;
      }
      .filtros button {
-         align-self: stretch; /* Stretch button as well */
+         align-self: stretch;
      }
 }
