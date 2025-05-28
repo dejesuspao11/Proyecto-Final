@@ -10,12 +10,28 @@ body {
   background-color: #f4f7f6; /* Added a light background */
 }
 
+/* Header container for title and logout button */
+.header-container {
+    display: flex; /* Use flexbox to align items */
+    justify-content: space-between; /* Push title and button to opposite ends */
+    align-items: center; /* Vertically center items */
+    margin-bottom: 20px; /* Add space below the header area */
+    flex-wrap: wrap; /* Allow items to wrap on smaller screens */
+    gap: 15px; /* Space between items when they wrap */
+    border-bottom: 2px solid #3498db; /* Moved border to the container */
+    padding-bottom: 10px; /* Moved padding bottom to the container */
+}
+
 h1 {
   color: #2c3e50;
-  border-bottom: 2px solid #3498db;
-  padding-bottom: 10px;
-  margin-bottom: 20px;
+  /* Styles below were moved or adjusted in .header-container */
+  margin: 0; /* Reset margin as it's in a flex container */
+  padding-bottom: 0; /* Reset padding as border is on container */
+  border-bottom: none; /* Remove border from h1 */
+  /* kept margin-bottom 20px from original h1 rule, but it might be overridden by header-container margin */
+  /* Adjust based on desired spacing, maybe remove or adjust the margin-bottom below if gap is enough */
 }
+
 
 p {
     margin-bottom: 20px;
@@ -88,6 +104,17 @@ button:hover {
     background-color: #e0a800;
 }
 
+#btn-logout {
+    /* Specific styles for logout button if needed,
+       otherwise it inherits from the general button rule */
+    margin-right: 0; /* Important if it's the last item in the flex container */
+    background-color: #dc3545; /* Red color for logout */
+}
+
+#btn-logout:hover {
+    background-color: #c82333;
+}
+
 
 /* Form styles */
 #formulario-activo {
@@ -147,6 +174,10 @@ label {
 .filter-group { /* Add a wrapper for each filter item */
     display: flex;
     flex-direction: column; /* Label above input/select */
+    /* Allow filter groups to grow if needed, but not shrink below content */
+    flex-basis: auto;
+    flex-grow: 1; /* Allow them to grow */
+    min-width: 150px; /* Minimum width before wrapping */
 }
 
 .filtros label {
@@ -172,8 +203,14 @@ label {
     font-size: 0.85em; /* Slightly larger than 0.8em */
     color: #777; /* A bit darker grey */
     margin-top: 5px; /* Space above the hint */
-    /* If you want it next to the input, change display to inline-block
-       and adjust layout of the parent .filter-group */
+}
+
+/* Style for the "Limpiar filtros" button within filters */
+.filtros button {
+    margin-top: auto; /* Push the button to the bottom if items have different heights */
+    align-self: flex-end; /* Align itself to the end of the flex container */
+    /* Revert some button specific styles if needed */
+    margin-right: 0; /* Ensure no right margin */
 }
 
 
@@ -184,6 +221,14 @@ label {
 
 /* Responsive considerations */
 @media (max-width: 768px) {
+    .header-container {
+        flex-direction: column; /* Stack header items vertically */
+        align-items: flex-start; /* Align items to the start */
+    }
+     .header-container h1 {
+         margin-bottom: 10px; /* Add space below title when stacked */
+     }
+
     .filtros {
         flex-direction: column; /* Stack filters vertically on smaller screens */
         align-items: stretch; /* Stretch items to fill container */
@@ -194,5 +239,8 @@ label {
      .filtros select,
      .filtros input[type="text"] {
          width: 100%; /* Make inputs/selects full width */
+     }
+     .filtros button {
+         align-self: stretch; /* Stretch button as well */
      }
 }
