@@ -4,16 +4,25 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Panel de Administración de Inventario</title>
+  <style>
+    table { border-collapse: collapse; width: 100%; margin-top: 10px; }
+    th, td { border: 1px solid #444; padding: 8px; text-align: left; }
+    th { background-color: #f0f0f0; }
+    #formulario-activo {
+      background-color: #f9f9f9; padding: 12px; border: 1px solid #ccc;
+      width: 100%; max-width: 500px; margin-top: 20px;
+    }
+    #mensaje { font-weight: bold; margin-top: 10px; }
+  </style>
 </head>
 <body>
   <h1>🧰 Panel de Administración de Activos</h1>
-
   <p>Administra los activos de TI: puedes agregar, editar o eliminar registros.</p>
 
   <button onclick="mostrarFormulario()">➕ Agregar nuevo activo</button>
 
   <!-- Tabla de activos -->
-  <table border="1">
+  <table>
     <thead>
       <tr>
         <th>Tipo</th>
@@ -30,18 +39,35 @@
     </tbody>
   </table>
 
-  <!-- Formulario de nuevo activo -->
-  <div id="formulario-activo" style="display:none; margin-top: 20px;">
-    <h3>Nuevo activo</h3>
+  <!-- Formulario para crear/editar activo -->
+  <div id="formulario-activo" style="display:none;">
+    <h3 id="form-titulo">Formulario de activo</h3>
     <form id="form-nuevo-activo">
-      <input type="text" id="tipo" placeholder="Tipo" required />
-      <input type="text" id="marca" placeholder="Marca" required />
-      <input type="text" id="modelo" placeholder="Modelo" required />
-      <input type="text" id="serie" placeholder="Número de serie" required />
+      <input
+        type="text"
+        id="marca"
+        placeholder="Marca"
+        required
+      />
+      <input
+        type="text"
+        id="modelo"
+        placeholder="Modelo"
+        required
+      />
+      <input
+        type="text"
+        id="serie"
+        placeholder="Número de serie (Ej. SN123456)"
+        required
+        pattern="^[A-Za-z0-9]{6,15}$"
+        title="Debe contener entre 6 y 15 caracteres alfanuméricos, sin espacios ni símbolos."
+      />
       <select id="estado">
         <option value="assigned">Asignado</option>
         <option value="free">Libre</option>
       </select>
+      <br><br>
       <button type="submit">Guardar</button>
       <button type="button" onclick="cancelarFormulario()">Cancelar</button>
     </form>
@@ -49,7 +75,9 @@
 
   <p id="mensaje"></p>
 
+  <!-- Supabase JS -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <!-- Lógica -->
   <script src="../js/inventory-admin.js"></script>
 </body>
 </html>
