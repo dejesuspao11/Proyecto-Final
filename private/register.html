@@ -4,24 +4,36 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Registro de Usuario</title>
+  <!-- Link to the external CSS file -->
+  <!-- Adjust the path '../css/style.css' if your file structure is different -->
+  <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
+
   <h1>👤 Registro de Usuario</h1>
-  <form id="signup-form">
-    <label for="email">Correo electrónico:</label><br>
-    <input type="email" id="email" required><br><br>
 
-    <label for="password">Contraseña:</label><br>
-    <input type="password" id="password" required><br><br>
+  <!-- Added a container div for styling -->
+  <div id="signup-container"> <!-- Using 'signup-container' ID -->
+    <form id="signup-form">
+      <label for="email">Correo electrónico:</label>
+      <!-- Removed <br> tags -->
+      <input type="email" id="email" required>
 
-    <button type="submit">Registrarse</button>
-  </form>
+      <label for="password">Contraseña:</label>
+      <!-- Removed <br> tags -->
+      <input type="password" id="password" required minlength="6"> <!-- Added minlength -->
 
+      <!-- Removed <br><br> -->
+      <button type="submit">Registrarse</button>
+    </form>
+  </div>
+
+  <!-- This paragraph will display messages from the JS -->
   <p id="mensaje"></p>
 
   <!-- Supabase client -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <!-- Lógica de autenticación -->
-  <script src="../js/auth.js"></script>
+  <script src="../js/auth.js"></script> <!-- Assuming auth.js is in js folder -->
 </body>
 </html>

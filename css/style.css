@@ -49,10 +49,12 @@ p {
 
 /* --- Shared Form/Container Styles --- */
 /* Container for forms (Login, Recover, Update Password, and Add/Edit Form) */
+/* ADDED #signup-container and assuming a potential #login-container */
 #recover-container,
 #formulario-activo, /* This is the add/edit form in Admin */
 #update-password-container,
-#login-container { /* Assuming your login form is wrapped like this */
+#login-container, /* Assuming your login form is wrapped like this */
+#signup-container { /* ADDED #signup-container */
   background-color: #fff;
   padding: 25px;
   border-radius: 8px;
@@ -64,6 +66,7 @@ p {
 
 /* Style for form inputs and selects */
 /* Applies to inputs/selects within the shared form containers */
+/* Added #signup-container and #login-container */
 #recover-container input,
 #recover-container select,
 #formulario-activo input,
@@ -71,7 +74,9 @@ p {
 #update-password-container input,
 #update-password-container select,
 #login-container input,
-#login-container select {
+#login-container select,
+#signup-container input, /* ADDED #signup-container */
+#signup-container select {
   display: block; /* Make inputs/selects block elements */
   width: 100%; /* Full width within their container */
   padding: 10px;
@@ -85,10 +90,12 @@ p {
 
 /* Style for form labels */
 /* Applies to labels within the shared form containers */
+/* Added #signup-container and #login-container */
 #recover-container label,
 #formulario-activo label,
 #update-password-container label,
-#login-container label {
+#login-container label,
+#signup-container label { /* ADDED #signup-container */
   display: block;
   margin-bottom: 5px;
   font-weight: bold;
@@ -98,18 +105,17 @@ p {
 
 /* Style for buttons within forms */
 /* Applies to buttons within the shared form containers */
+/* Added #signup-container and #login-container */
 #recover-container button[type="submit"],
 #formulario-activo button[type="submit"],
 #formulario-activo button[type="button"],
 #update-password-container button[type="submit"],
-#login-container button[type="submit"] {
+#login-container button[type="submit"],
+#signup-container button[type="submit"] { /* ADDED #signup-container */
     /* Inherits general button styles */
     margin-right: 10px; /* Add some space between buttons */
     margin-top: 10px; /* Add space above buttons */
 }
-
-/* Specific style for the Update Password submit button if needed */
-/* #update-password-container button[type="submit"] { ... } */
 
 
 /* --- Message box styles --- */
@@ -333,7 +339,7 @@ button:hover {
 }
 
 /* --- Styles for the Main Menu Page --- */
-#main-menu-container { /* ADDED */
+#main-menu-container {
   background-color: #fff;
   padding: 40px 25px; /* Increased vertical padding */
   border-radius: 8px;
@@ -344,7 +350,7 @@ button:hover {
 }
 
 /* Button group layout */
-.button-group { /* ADDED */
+.button-group {
   display: flex; /* Arrange links using flexbox */
   gap: 20px; /* Space between buttons */
   justify-content: center; /* Center the button group */
@@ -352,7 +358,7 @@ button:hover {
 }
 
 /* Style for links that look like buttons */
-.button-link { /* ADDED */
+.button-link {
   display: inline-block; /* Needed for padding/margins */
   background-color: #3498db;
   color: white;
@@ -367,7 +373,7 @@ button:hover {
   min-width: 180px; /* Give buttons a minimum width */
 }
 
-.button-link:hover { /* ADDED */
+.button-link:hover {
   background-color: #2980b9;
   color: white; /* Ensure color stays white on hover */
 }
@@ -416,12 +422,12 @@ button:hover {
       }
 
      /* Main menu buttons responsive */
-     .button-group { /* ADDED */
+     .button-group {
         flex-direction: column; /* Stack buttons vertically */
         gap: 15px;
         align-items: stretch; /* Stretch buttons to full width */
      }
-      .button-link { /* ADDED */
+      .button-link {
          min-width: auto; /* Remove min-width when stacked */
       }
 
@@ -435,6 +441,7 @@ button:hover {
       #formulario-activo,
       #update-password-container,
       #login-container,
+      #signup-container, /* ADDED #signup-container */
       #public-inventory-container {
         padding: 15px; /* Reduce padding on smaller containers */
       }
