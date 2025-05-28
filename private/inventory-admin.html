@@ -1,39 +1,55 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Inventario - Administración</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-    body { font-family: Arial, sans-serif; padding: 20px; }
-    table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-    th, td { border: 1px solid #ccc; padding: 10px; text-align: left; }
-    th { background-color: #f0f0f0; }
-    h1 { margin-bottom: 10px; }
-  </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Panel de Administración de Inventario</title>
 </head>
 <body>
-  <h1>📦 Inventario de Activos (Panel TI)</h1>
-  <p>Vista interna para gestión del inventario</p>
+  <h1>🧰 Panel de Administración de Activos</h1>
 
-  <table>
+  <p>Administra los activos de TI: puedes agregar, editar o eliminar registros.</p>
+
+  <button onclick="mostrarFormulario()">➕ Agregar nuevo activo</button>
+
+  <!-- Tabla de activos -->
+  <table border="1">
     <thead>
       <tr>
-        <th>Serie</th>
-        <th>Nombre</th>
         <th>Tipo</th>
+        <th>Marca</th>
+        <th>Modelo</th>
+        <th>Serie</th>
         <th>Estado</th>
         <th>Asignado a</th>
+        <th>Acciones</th>
       </tr>
     </thead>
-    <tbody id="tabla-inventario">
-      <!-- Se llenará con JS -->
+    <tbody id="tabla-activos">
+      <!-- Se llenará dinámicamente -->
     </tbody>
   </table>
 
-  <!-- Supabase -->
+  <!-- Formulario de nuevo activo -->
+  <div id="formulario-activo" style="display:none; margin-top: 20px;">
+    <h3>Nuevo activo</h3>
+    <form id="form-nuevo-activo">
+      <input type="text" id="tipo" placeholder="Tipo" required />
+      <input type="text" id="marca" placeholder="Marca" required />
+      <input type="text" id="modelo" placeholder="Modelo" required />
+      <input type="text" id="serie" placeholder="Número de serie" required />
+      <select id="estado">
+        <option value="assigned">Asignado</option>
+        <option value="free">Libre</option>
+      </select>
+      <button type="submit">Guardar</button>
+      <button type="button" onclick="cancelarFormulario()">Cancelar</button>
+    </form>
+  </div>
+
+  <p id="mensaje"></p>
+
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <!-- Script personalizado -->
   <script src="../js/inventory-admin.js"></script>
 </body>
 </html>

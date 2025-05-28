@@ -27,7 +27,7 @@ async function obtenerInventario() {
         <td>${item.asset_type_id || '-'}</td>
         <td>${item.make || '-'}</td>
         <td>${(item.model || '-').replace(/'/g, '')}</td>
-        <td>${item.serial_number || '-'}</td>
+        <td>${(item.serial_number || '-').replace(/'/g, '')}</td>
         <td>${item.status || '-'}</td>
         <td>${item.users?.full_name || 'Sin asignar'}</td>
       `;
